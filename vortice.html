@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vortice — Automação e Inteligência Artificial para o seu negócio</title>
+<meta name="description" content="A Vortice implementa automação e agentes de IA sob medida — do atendimento à operação.">
+<meta property="og:title" content="Vortice — Automação e IA sob medida">
+<meta property="og:description" content="Sua operação, no automático.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#000;--bg-2:#08070A;
+--line:rgba(255,255,255,.10);--line-soft:rgba(255,255,255,.05);
+--text:#F0EFEC;--text-muted:#8E8E8A;--text-dim:#5A5A56;
+--violet:#7C1FFF;--violet-soft:#B78CFF;--violet-ink:#fff;
+--radius:6px;
+--fd:"Clash Display","Space Grotesk",system-ui,sans-serif;
+--fb:"Satoshi","Inter",system-ui,sans-serif;
+--fm:"Space Mono",ui-monospace,SFMono-Regular,monospace;
+--pad:clamp(1.2rem,5vw,3rem);
+--fs-hero:clamp(2.7rem,6vw + .8rem,5rem);
+--fs-h2:clamp(1.8rem,2.8vw + .5rem,2.6rem);
+--e:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--fd);font-weight:600;line-height:1.03;letter-spacing:-.025em}
+h1{font-size:var(--fs-hero)}h2{font-size:var(--fs-h2)}h3{font-size:1.15rem}
+a{color:inherit;text-decoration:none}
+.container{width:min(1140px,100% - 2*var(--pad));margin-inline:auto}
+.label{font-family:var(--fm);text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--text-dim)}
+.lead{font-size:clamp(1.05rem,.5vw + .95rem,1.22rem);color:var(--text-muted);max-width:50ch}
+.accent{color:var(--violet-soft)}
+:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--violet);color:#fff;padding:.5rem 1rem;z-index:99}
+.ar{display:inline-block;transition:transform .2s var(--e)}
+
+#field{position:fixed;inset:0;z-index:-3;pointer-events:none}
+.bg-grain{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:1.1rem var(--pad);background:rgba(0,0,0,.5);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+.nav.scrolled{background:rgba(0,0,0,.88);border-bottom-color:var(--line)}
+.brand{font-family:var(--fd);font-weight:600;font-size:1.15rem;letter-spacing:-.01em}
+.brand b{color:var(--violet-soft);font-weight:600}
+.nav__menu{display:flex;align-items:center;gap:2rem}
+.nav__menu a{color:var(--text-muted);font-size:.95rem;transition:color .15s}
+.nav__menu a:hover{color:var(--text)}
+.nav__cta{border:1px solid var(--line);border-radius:var(--radius);padding:.5rem .9rem!important;color:var(--text)!important;transition:.15s}
+.nav__cta:hover{border-color:var(--violet)}.nav__cta:hover .ar{transform:translateX(3px)}
+.nav__toggle{display:none;background:none;border:0;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.nav__toggle span{width:22px;height:2px;background:var(--text)}
+
+.hero{position:relative;overflow:hidden;padding:clamp(4.5rem,12vw,9rem) 0 clamp(3rem,7vw,5rem)}
+.hero .label{display:block;margin-bottom:1.8rem}
+.hero h1{margin-bottom:1.8rem;max-width:14ch}
+.hero__cta{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;margin-top:2.4rem}
+.btn{display:inline-flex;align-items:center;gap:.45rem;font-weight:700;font-size:.98rem;border-radius:var(--radius);padding:.85rem 1.4rem;transition:background .15s;border:1px solid transparent}
+.btn--primary{background:var(--violet);color:#fff}
+.btn--primary:hover{background:#9146FF}.btn:hover .ar{transform:translateX(3px)}
+.link{display:inline-flex;align-items:center;gap:.45rem;color:var(--text);border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .15s}
+.link:hover{border-color:var(--violet)}.link:hover .ar{transform:translateX(3px)}
+.meta{display:flex;flex-wrap:wrap;gap:2.8rem;margin-top:3.2rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+.meta .label{display:block;margin-bottom:.35rem}.meta .v{font-size:.98rem;color:var(--text)}
+
+.marquee{border-block:1px solid var(--line);padding:1rem 0;overflow:hidden;white-space:nowrap}
+.marquee__track{display:inline-flex;gap:3.2rem;animation:mq 36s linear infinite;will-change:transform}
+.marquee span{font-family:var(--fm);text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--text-dim)}
+.marquee i{font-style:normal;color:var(--violet)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+.section{padding:clamp(3.5rem,8vw,6.5rem) 0;border-top:1px solid var(--line)}
+.split{display:grid;grid-template-columns:300px 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.rail{position:sticky;top:6rem}
+.rail .label{display:block;margin-bottom:1rem}
+.rail h2{max-width:12ch}
+
+.rows{border-top:1px solid var(--line)}
+.row{position:relative;display:grid;grid-template-columns:48px 4fr 6fr 36px;gap:1.4rem;padding:1.7rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.row .n{font-family:var(--fm);color:var(--text-dim);font-size:.85rem}
+.row h3{transition:color .15s}.row p{color:var(--text-muted)}
+.row .go{font-size:1.15rem;color:var(--text-dim);justify-self:end;transition:transform .25s var(--e),color .15s}
+.row:hover h3{color:var(--violet-soft)}
+.row:hover .go{transform:translateX(5px);color:var(--violet-soft)}
+
+.steps{border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:48px 1fr;gap:1.4rem;padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.step .n{font-family:var(--fm);color:var(--violet-soft);font-size:.85rem}
+.step p{color:var(--text-muted);margin-top:.3rem;max-width:56ch}
+
+.stats__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.stat__n{font-family:var(--fd);font-weight:600;font-size:clamp(2.4rem,5vw,3.6rem);display:block;letter-spacing:-.03em}
+.stat .label{display:block;margin-top:.5rem}
+
+.berg{position:relative}
+.berg__grid{display:grid;grid-template-columns:1fr 340px;gap:clamp(2rem,5vw,4rem);align-items:center}
+.berg__art{position:relative}
+.berg__art svg{width:100%;max-width:340px;margin-inline:auto}
+.wline{position:absolute;left:calc(-1*var(--pad) - 40vw);right:0;top:44%;height:1px;background:linear-gradient(90deg,transparent,var(--violet) 30%,var(--violet));opacity:.45;transform:scaleX(0);transform-origin:right;transition:transform 1.2s var(--e)}
+.berg.in .wline{transform:scaleX(1)}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.8rem}
+.chips li{display:inline-flex;align-items:center;gap:.55rem;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;padding:.5rem .95rem;font-weight:700;font-size:.9rem}
+.chip__b{width:17px;height:17px;border-radius:5px;background:var(--violet);flex:none;position:relative}
+.chip__b::after{content:"";position:absolute;left:5px;top:3px;width:4px;height:8px;border:2px solid #fff;border-top:0;border-left:0;transform:rotate(40deg)}
+.berg .label{display:block;margin-bottom:1rem}
+.berg .wl__big{font-family:var(--fd);font-weight:600;letter-spacing:-.015em;font-size:clamp(1.2rem,1.2vw + 1rem,1.6rem);line-height:1.3;margin-bottom:.4rem}
+.berg .above{margin-bottom:2.6rem}
+.berg .above .label{color:var(--violet-soft)}
+
+.faq{border-top:1px solid var(--line)}
+.faq__item{border-bottom:1px solid var(--line)}
+.faq__q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem;background:none;border:0;color:var(--text);font-family:var(--fd);font-weight:600;font-size:1.05rem;text-align:left;padding:1.4rem 0;cursor:pointer}
+.faq__ic{font-family:var(--fm);color:var(--violet-soft);font-size:1.4rem;line-height:1;transition:transform .25s var(--e)}
+.faq__item.open .faq__ic{transform:rotate(45deg)}
+.faq__a{max-height:0;overflow:hidden;opacity:0;transition:max-height .35s var(--e),opacity .3s ease}
+.faq__item.open .faq__a{opacity:1}
+.faq__a p{padding:0 0 1.4rem;color:var(--text-muted);max-width:62ch}
+
+.cta{border-top:1px solid var(--line);padding:clamp(4.5rem,11vw,8rem) 0;text-align:center}
+.cta .label{display:block;margin-bottom:1.4rem}
+.cta h2{font-size:clamp(2.2rem,5vw + .5rem,4rem);max-width:17ch;margin-inline:auto;margin-bottom:2.2rem}
+.footer{border-top:1px solid var(--line);padding:2.6rem 0;color:var(--text-muted)}
+.footer__inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;align-items:center}
+.footer a:hover{color:var(--violet-soft)}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--e),transform .55s var(--e)}
+.reveal.in{opacity:1;transform:none}
+.mask{overflow:hidden}.mask .rise{display:block;transform:translateY(115%);transition:transform .75s var(--e)}
+.mask.in .rise{transform:none}
+
+@media(max-width:900px){
+.split{grid-template-columns:1fr}.rail{position:static}
+.berg__grid{grid-template-columns:1fr}.berg__art{order:-1}.wline{display:none}
+}
+@media(max-width:800px){
+.row{grid-template-columns:1fr;gap:.4rem}.row .go{display:none}
+.step{grid-template-columns:1fr;gap:.3rem}
+.stats__grid{grid-template-columns:1fr;gap:1.6rem}
+.nav__menu{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;gap:1.1rem;padding:1.3rem var(--pad);background:var(--bg-2);border-bottom:1px solid var(--line);transform:translateY(-10px);opacity:0;pointer-events:none;transition:.2s}
+.nav__menu.open{transform:none;opacity:1;pointer-events:auto}.nav__toggle{display:flex}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}.reveal,.mask .rise{opacity:1;transform:none}.wline{transform:scaleX(1)}#field{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+<canvas id="field" aria-hidden="true"></canvas><div class="bg-grain"></div>
+<header class="nav" id="top">
+  <a class="brand" href="#top" aria-label="Vortice — início">vortice<b>ia</b></a>
+  <button class="nav__toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+  <nav class="nav__menu" id="menu">
+    <a href="#servicos">Serviços</a>
+    <a href="#processo">Processo</a>
+    <a href="#diferencial">Diferencial</a>
+    <a href="#faq">Dúvidas</a>
+    <a class="nav__cta" href="#contato">Falar no WhatsApp <span class="ar">→</span></a>
+  </nav>
+</header>
+<main id="main">
+  <section class="hero container">
+    <span class="label reveal">Automação · Agentes de IA · Soluções de IA</span>
+    <h1 class="mask"><span class="rise">Sua operação,</span><span class="rise" style="transition-delay:.09s"><span class="accent">no automático.</span></span></h1>
+    <p class="lead reveal">A Vortice desenha e implementa automação e inteligência artificial sob medida — do atendimento à gestão, rodando 24 horas por dia, sem você precisar olhar.</p>
+    <div class="hero__cta reveal">
+      <a class="btn btn--primary" href="#contato">Automatizar minha operação <span class="ar">→</span></a>
+      <a class="link" href="#processo">Ver o processo <span class="ar">→</span></a>
+    </div>
+    <div class="meta reveal">
+      <div><span class="label">Resposta</span><span class="v">Segundos</span></div>
+      <div><span class="label">Operação</span><span class="v">24 / 7</span></div>
+      <div><span class="label">Abordagem</span><span class="v">Sob medida</span></div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee__track">
+    <span>Atendimento no automático <i>·</i></span><span>Leads qualificados <i>·</i></span><span>Fluxos sem retrabalho <i>·</i></span><span>Integração com suas ferramentas <i>·</i></span><span>Dados que viram decisão <i>·</i></span>
+    <span>Atendimento no automático <i>·</i></span><span>Leads qualificados <i>·</i></span><span>Fluxos sem retrabalho <i>·</i></span><span>Integração com suas ferramentas <i>·</i></span><span>Dados que viram decisão <i>·</i></span>
+  </div></div>
+
+  <section class="section" id="servicos">
+    <div class="container split">
+      <div class="rail"><span class="label reveal">01 — Serviços</span><h2 class="mask"><span class="rise">Três frentes. Uma operação que roda sozinha.</span></h2></div>
+      <div class="rows">
+        <a class="row reveal" href="#contato"><span class="n">01</span><h3>Automação de processos</h3><p>O que sua equipe faz na mão todo dia, rodando sozinho — sem retrabalho e sem esquecimento.</p><span class="go">→</span></a>
+        <a class="row reveal" href="#contato"><span class="n">02</span><h3>Agentes de IA</h3><p>Atendem, qualificam e vendem no WhatsApp, 24 horas por dia. Nenhum lead esfria.</p><span class="go">→</span></a>
+        <a class="row reveal" href="#contato"><span class="n">03</span><h3>Soluções de IA sob medida</h3><p>Integrações, dashboards e inteligência desenhados para a sua operação — nada de prateleira.</p><span class="go">→</span></a>
+        <div class="stats__grid" style="padding-top:2.2rem">
+          <div class="stat reveal"><span class="stat__n" data-count="3">0</span><span class="label">frentes de automação</span></div>
+          <div class="stat reveal"><span class="stat__n" data-count="24" data-suffix="h">0</span><span class="label">rodando por dia</span></div>
+          <div class="stat reveal"><span class="stat__n" data-count="100" data-suffix="%">0</span><span class="label">sob medida</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="processo">
+    <div class="container split">
+      <div class="rail"><span class="label reveal">02 — Processo</span><h2 class="mask"><span class="rise">Do diagnóstico ao automático.</span></h2></div>
+      <div class="steps">
+        <div class="step reveal"><span class="n">01</span><div><h3>Diagnóstico</h3><p>Mapeamos onde a operação trava e o que automatizar primeiro.</p></div></div>
+        <div class="step reveal"><span class="n">02</span><div><h3>Desenho</h3><p>Projetamos os fluxos e agentes sob medida para o seu negócio.</p></div></div>
+        <div class="step reveal"><span class="n">03</span><div><h3>Implementação</h3><p>Colocamos para rodar, integrado às ferramentas que você já usa.</p></div></div>
+        <div class="step reveal"><span class="n">04</span><div><h3>Acompanhamento</h3><p>Medimos, ajustamos e escalamos o que dá resultado.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section berg" id="diferencial">
+    <div class="container">
+      <div class="berg__grid">
+        <div>
+          <span class="label reveal">03 — Diferencial</span>
+          <h2 class="mask" style="margin-bottom:2.2rem"><span class="rise">O que você vê é só a superfície.</span></h2>
+          <div class="above reveal">
+            <span class="label">Na superfície</span>
+            <p class="wl__big">Faturamento subindo. Resposta em segundos. Cliente bem atendido, todo dia.</p>
+          </div>
+          <div class="reveal">
+            <span class="label">O que sustenta</span>
+            <ul class="chips">
+              <li><span class="chip__b"></span>Gestão de dados</li>
+              <li><span class="chip__b"></span>Qualificação de leads</li>
+              <li><span class="chip__b"></span>Integrações e APIs</li>
+              <li><span class="chip__b"></span>Agentes de IA</li>
+              <li><span class="chip__b"></span>Análise profunda</li>
+            </ul>
+          </div>
+        </div>
+        <div class="berg__art reveal" aria-hidden="true">
+          <div class="wline"></div>
+          <svg viewBox="0 0 300 360">
+            <polygon points="150,34 116,130 150,142 186,126" fill="#F2F2F4"/>
+            <polygon points="150,34 150,142 186,126" fill="#FFF"/>
+            <polygon points="116,130 150,158 150,142" fill="#D8D9DC"/>
+            <polygon points="150,142 186,126 190,158 150,158" fill="#C6C7CB"/>
+            <polygon points="150,158 96,236 150,254 208,232" fill="#6E7075"/>
+            <polygon points="150,158 208,232 190,158" fill="#5C5E63"/>
+            <polygon points="96,236 128,312 150,312 150,254" fill="#45474C"/>
+            <polygon points="150,254 150,312 180,306 208,232" fill="#3A3C41"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container split">
+      <div class="rail"><span class="label reveal">04 — Dúvidas</span><h2 class="mask"><span class="rise">Perguntas frequentes.</span></h2></div>
+      <div class="faq reveal">
+        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>Preciso trocar as ferramentas que já uso?</span><span class="faq__ic">+</span></button><div class="faq__a"><p>Não. A Vortice integra a automação com o que você já tem — WhatsApp, planilhas, CRM, ERP — e só substitui o que fizer sentido.</p></div></div>
+        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>Quanto tempo até ver resultado?</span><span class="faq__ic">+</span></button><div class="faq__a"><p>Depende do escopo, mas os fluxos mais simples costumam entrar no ar em poucos dias. O restante é implementado por etapas, com prioridade no que gera resultado primeiro.</p></div></div>
+        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>Serve para o meu tipo de negócio?</span><span class="faq__ic">+</span></button><div class="faq__a"><p>Se a sua operação tem tarefa repetitiva ou atendimento, quase certamente sim. No diagnóstico a gente confirma exatamente o que faz sentido no seu caso.</p></div></div>
+        <div class="faq__item"><button class="faq__q" aria-expanded="false"><span>É seguro para os meus dados?</span><span class="faq__ic">+</span></button><div class="faq__a"><p>Sim. Tudo é implementado com controle de acesso e boas práticas de segurança e privacidade de dados.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contato">
+    <div class="container">
+      <span class="label reveal">05 — Próximo passo</span>
+      <h2 class="mask"><span class="rise">Tire a operação manual das costas.</span></h2>
+      <a class="btn btn--primary reveal" href="https://wa.me/5531984614506" target="_blank" rel="noopener">Chamar no WhatsApp <span class="ar">→</span></a>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="container footer__inner">
+    <span class="brand">vortice<b>ia</b></span>
+    <span class="label">Inteligência Artificial aplicada ao seu negócio</span>
+    <span class="label">© <span id="year"></span> · <a href="https://wa.me/5531984614506">WhatsApp</a> · <a href="#top">Topo</a></span>
+  </div>
+</footer>
+<script>
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.getElementById('year').textContent=new Date().getFullYear();
+var t=document.querySelector('.nav__toggle'),m=document.getElementById('menu'),nav=document.querySelector('.nav');
+t.addEventListener('click',function(){var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o);});
+m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');});});
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>16);},{passive:true});
+
+/* Vórtice com rastros de luz — assinatura da marca */
+(function(){
+  if(reduce)return;
+  var c=document.getElementById('field'),x=c.getContext('2d'),W,H,P=[];
+  function size(){W=c.width=innerWidth;H=c.height=innerHeight;x.fillStyle='#000';x.fillRect(0,0,W,H);}
+  size();addEventListener('resize',size);
+  var CX=function(){return W*0.7},CY=function(){return H*0.36};
+  function spawn(p){p.r=60+Math.random()*Math.max(W,H)*0.5;p.a=Math.random()*Math.PI*2;p.v=Math.random();return p;}
+  for(var i=0;i<64;i++){P.push(spawn({}));}
+  function tick(){
+    x.fillStyle='rgba(0,0,0,0.075)';x.fillRect(0,0,W,H);
+    for(var i=0;i<P.length;i++){
+      var p=P[i];
+      var px=CX()+Math.cos(p.a)*p.r,py=CY()+Math.sin(p.a)*p.r*0.6;
+      p.a+=2.2/p.r+0.0012;        /* mais rápido perto do centro, como um redemoinho real */
+      p.r-=0.22;
+      if(p.r<26)spawn(p);
+      var nx=CX()+Math.cos(p.a)*p.r,ny=CY()+Math.sin(p.a)*p.r*0.6;
+      x.beginPath();x.moveTo(px,py);x.lineTo(nx,ny);
+      x.strokeStyle=p.v>0.62?'rgba(157,102,255,'+(0.10+p.v*0.22)+')':'rgba(235,233,240,'+(0.05+p.v*0.10)+')';
+      x.lineWidth=p.v>0.85?1.3:0.8;
+      x.lineCap='round';x.stroke();
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16});
+document.querySelectorAll('.reveal,.mask,.berg').forEach(function(el){io.observe(el);});
+
+function countUp(el){
+  var target=parseFloat(el.getAttribute('data-count')),suf=el.getAttribute('data-suffix')||'',dur=1200,s=performance.now();
+  if(reduce){el.textContent=target+suf;return;}
+  function step(now){var p=Math.min((now-s)/dur,1);var eased=1-Math.pow(1-p,3);el.textContent=Math.round(target*eased)+suf;if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target);}});},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+
+document.querySelectorAll('.faq__item').forEach(function(it){
+  var q=it.querySelector('.faq__q'),a=it.querySelector('.faq__a');
+  q.addEventListener('click',function(){
+    var open=it.classList.toggle('open');
+    q.setAttribute('aria-expanded',open);
+    a.style.maxHeight=open?a.scrollHeight+'px':'0';
+  });
+});
+setTimeout(function(){document.querySelectorAll('.reveal,.mask').forEach(function(el){el.classList.add('in');});},1600);
+</script>
+</body>
+</html>
